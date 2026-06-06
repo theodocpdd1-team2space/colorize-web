@@ -1,0 +1,81 @@
+.section {
+  padding: 6rem 5%;
+  background: var(--bg-primary);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.heading {
+  font-family: var(--font-sora);
+  font-size: clamp(2rem, 3vw, 2.5rem);
+  text-align: center;
+  color: var(--text-primary);
+  margin-bottom: 4rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(255, 106, 0, 0.2);
+}
+
+.quoteIcon {
+  font-family: var(--font-sora);
+  font-size: 4rem;
+  color: var(--accent-primary);
+  line-height: 1;
+  opacity: 0.3;
+  margin-bottom: -1rem;
+}
+
+.quote {
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  font-style: italic;
+  margin-bottom: 2rem;
+  flex-grow: 1;
+}
+
+.authorSection {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border-top: 1px solid var(--glass-border);
+  padding-top: 1.5rem;
+}
+
+.authorAvatar {
+  width: 40px;
+  height: 40px;
+  background: var(--accent-primary);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.8;
+}
+
+.authorName {
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 0.95rem;
+}

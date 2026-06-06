@@ -1,0 +1,194 @@
+.section {
+  padding: 6rem 5%;
+  background: var(--bg-primary);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.imageColumn {
+  position: relative;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  background: #111;
+}
+
+.placeholderImage {
+  width: 100%;
+  height: 100%;
+  background-image: url('/fototheo.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  transition: transform 0.5s ease;
+}
+
+.imageWrapper:hover .placeholderImage {
+  transform: scale(1.05);
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    0deg,
+    rgba(5, 5, 5, 0.65) 0%,
+    rgba(5, 5, 5, 0.15) 45%,
+    rgba(255, 106, 0, 0.08) 100%
+  );
+  pointer-events: none;
+}
+
+.imageAccent {
+  position: absolute;
+  bottom: -20px;
+  right: -20px;
+  width: 150px;
+  height: 150px;
+  border-right: 4px solid var(--accent-primary);
+  border-bottom: 4px solid var(--accent-primary);
+  z-index: -1;
+}
+
+.textColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+.heading {
+  font-family: var(--font-sora);
+  font-size: clamp(1.8rem, 2.5vw, 2.5rem);
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+}
+
+.body {
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  margin-bottom: 2.5rem;
+}
+
+.highlightBox {
+  background: rgba(255, 106, 0, 0.05);
+  border: 1px solid rgba(255, 106, 0, 0.2);
+  padding: 1.5rem;
+  border-radius: 8px;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.highlightLine {
+  width: 4px;
+  min-width: 4px;
+  height: 50px;
+  background: var(--accent-primary);
+  border-radius: 2px;
+}
+
+.highlightText {
+  font-family: var(--font-sora);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  font-style: italic;
+}
+
+/* Tablet */
+@media (max-width: 992px) {
+  .container {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .imageColumn {
+    width: 100%;
+  }
+
+  .imageWrapper {
+    aspect-ratio: 4 / 5;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  .placeholderImage {
+    background-position: center center;
+  }
+
+  .imageAccent {
+    display: none;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .section {
+    padding: 4rem 5%;
+  }
+
+  .container {
+    gap: 2.5rem;
+  }
+
+  .imageWrapper {
+    aspect-ratio: 4 / 5;
+    max-width: 100%;
+    border-radius: 10px;
+  }
+
+  .placeholderImage {
+    background-size: cover;
+    background-position: center center;
+  }
+
+  .heading {
+    font-size: clamp(1.8rem, 8vw, 2.4rem);
+  }
+
+  .body {
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+
+  .highlightBox {
+    padding: 1.25rem;
+    align-items: flex-start;
+  }
+
+  .highlightText {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+}
+
+/* Small Phone */
+@media (max-width: 480px) {
+  .section {
+    padding: 3.5rem 1.25rem;
+  }
+
+  .imageWrapper {
+    aspect-ratio: 4 / 5;
+  }
+
+  .placeholderImage {
+    background-position: center center;
+  }
+}

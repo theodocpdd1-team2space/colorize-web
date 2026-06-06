@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theofilus | Tech & Visual Portfolio</title>
+    
+    <!-- Fonts: Plus Jakarta Sans for modern, clean look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons: Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#0a0a0a',
+                            light: '#ffffff',
+                            accent1: '#3b82f6', // Blue for Tech
+                            accent2: '#8b5cf6', // Purple for Visual
+                        }
+                    },
+                    animation: {
+                        'spin-slow': 'spin 8s linear infinite',
+                        'blob': 'blob 7s infinite',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #050505;
+            color: #f3f4f6;
+            overflow-x: hidden;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        /* Glassmorphism utilities */
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .glass-nav {
+            background: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        /* Text Gradients */
+        .text-gradient {
+            background: linear-gradient(to right, #3b82f6, #8b5cf6, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Scroll Reveal Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+
+        /* Custom glowing cursor follower */
+        #cursor-glow {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, rgba(0,0,0,0) 70%);
+            pointer-events: none;
+            z-index: 0;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s, height 0.3s;
+        }
+
+        /* Card Hover Effects */
+        .hover-card {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .hover-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(139, 92, 246, 0.3);
+            box-shadow: 0 10px 40px -10px rgba(139, 92, 246, 0.15);
+        }
+        
+        /* Grid layout for images */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            grid-auto-flow: dense;
+        }
+        @media (min-width: 768px) {
+            .bento-wide { grid-column: span 2; }
+            .bento-tall { grid-row: span 2; }
+        }
+    </style>
+</head>
+<body class="antialiased relative selection:bg-brand-accent2 selection:text-white">
+
+    <!-- Glowing Cursor Effect Background -->
+    <div id="cursor-glow"></div>
+
+    <!-- Ambient Background Blobs -->
+    <div class="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+        <div class="absolute top-[-10%] left-[-10%] w-96 h-96 bg-brand-accent2/20 rounded-full mix-blend-screen filter blur-[100px] opacity-50 animate-blob"></div>
+        <div class="absolute top-[20%] right-[-10%] w-96 h-96 bg-brand-accent1/20 rounded-full mix-blend-screen filter blur-[100px] opacity-50 animate-blob animation-delay-2000"></div>
+        <div class="absolute bottom-[-20%] left-[20%] w-[500px] h-[500px] bg-pink-500/10 rounded-full mix-blend-screen filter blur-[120px] opacity-50 animate-blob animation-delay-4000"></div>
+    </div>
+
+    <!-- Floating Navigation -->
+    <nav class="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50">
+        <div class="glass-nav rounded-full px-6 py-3 flex items-center gap-6 shadow-2xl">
+            <a href="#home" class="text-gray-400 hover:text-white transition-colors text-sm font-medium flex items-center gap-2">
+                <i class="ph ph-house text-lg"></i> <span class="hidden sm:inline">Home</span>
+            </a>
+            <a href="#vision" class="text-gray-400 hover:text-white transition-colors text-sm font-medium flex items-center gap-2">
+                <i class="ph ph-eye text-lg"></i> <span class="hidden sm:inline">Vision</span>
+            </a>
+            <a href="#expertise" class="text-gray-400 hover:text-white transition-colors text-sm font-medium flex items-center gap-2">
+                <i class="ph ph-code text-lg"></i> <span class="hidden sm:inline">Expertise</span>
+            </a>
+            <a href="#contact" class="bg-white text-black px-4 py-1.5 rounded-full text-sm font-bold hover:scale-105 transition-transform flex items-center gap-2">
+                Let's Talk <i class="ph-bold ph-arrow-right"></i>
+            </a>
+        </div>
+    </nav>
+
+    <main class="max-w-6xl mx-auto px-6 pt-24 pb-40 relative z-10">
+        
+        <!-- HEADER / HERO SECTION -->
+        <section id="home" class="min-h-[80vh] flex flex-col justify-center items-center text-center pt-10">
+            <div class="reveal mb-6 relative">
+                <!-- Profile Avatar -->
+                <div class="w-32 h-32 rounded-full p-1 bg-gradient-to-tr from-brand-accent1 to-brand-accent2 mx-auto">
+                    <img src="https://images.unsplash.com/photo-1618085220188-b4f210d22703?q=80&w=400&auto=format&fit=crop" alt="Theofilus" class="w-full h-full rounded-full object-cover border-4 border-[#050505]">
+                </div>
+                <div class="absolute -bottom-2 -right-2 bg-[#050505] rounded-full p-2 border border-gray-800 flex items-center gap-1 shadow-lg">
+                    <span class="relative flex h-3 w-3">
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                      <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                    </span>
+                    <span class="text-xs font-medium text-gray-300 pr-1">Available for work</span>
+                </div>
+            </div>
+
+            <h1 class="reveal reveal-delay-1 text-5xl md:text-7xl font-extrabold tracking-tight mb-4">
+                Hi, I'm <span class="text-white">Theofilus</span>.
+            </h1>
+            <h2 class="reveal reveal-delay-2 text-3xl md:text-5xl font-bold mb-6">
+                Bridging <span class="text-gradient">Tech</span> & <span class="text-gradient">Visuals</span>.
+            </h2>
+            
+            <p class="reveal reveal-delay-3 text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
+                Saya seorang Videographer & Web Developer. Berangkat dari kecintaan mendalam pada teknologi dan visual, saya membangun pengalaman digital dan mengabadikan momen yang bermakna.
+            </p>
+
+            <div class="reveal reveal-delay-3 flex flex-wrap justify-center gap-4">
+                <a href="#expertise" class="glass px-8 py-4 rounded-full font-semibold text-white hover:bg-white/10 transition-colors flex items-center gap-2">
+                    Explore My Work <i class="ph ph-arrow-down"></i>
+                </a>
+                <a href="https://wa.me/62895345902896" target="_blank" class="bg-white text-black px-8 py-4 rounded-full font-bold hover:bg-gray-200 transition-colors flex items-center gap-2">
+                    <i class="ph-fill ph-whatsapp-logo text-xl"></i> Contact Me
+                </a>
+            </div>
+        </section>
+
+        <!-- VISION SECTION (Colorize Visual) -->
+        <section id="vision" class="py-24">
+            <div class="glass rounded-3xl p-8 md:p-14 hover-card reveal relative overflow-hidden">
+                <!-- Decorative background elements inside card -->
+                <div class="absolute top-0 right-0 w-64 h-64 bg-brand-accent2/10 rounded-full mix-blend-screen filter blur-[50px]"></div>
+                
+                <div class="flex flex-col md:flex-row items-center gap-10 relative z-10">
+                    <div class="w-full md:w-1/3">
+                        <div class="w-20 h-20 bg-gradient-to-br from-brand-accent2 to-pink-500 rounded-2xl flex items-center justify-center mb-6 shadow-lg shadow-purple-500/20 text-3xl text-white">
+                            <i class="ph-fill ph-aperture"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-2">Colorize Visual</h3>
+                        <p class="text-brand-accent1 font-medium mb-4">The Big Dream</p>
+                    </div>
+                    <div class="w-full md:w-2/3 border-l-0 md:border-l border-gray-800 md:pl-10">
+                        <i class="ph-fill ph-quotes text-4xl text-gray-700 mb-4 block"></i>
+                        <h4 class="text-2xl md:text-3xl font-semibold leading-tight mb-6">
+                            "Kami tidak hanya sekadar mendokumentasikan acara, kami ingin menyentuh acaramu lebih dalam. <span class="text-gradient">Touch your event more!</span>"
+                        </h4>
+                        <p class="text-gray-400 text-lg leading-relaxed">
+                            Mimpi besar saya adalah agar Colorize Visual tidak hanya menjadi penyedia jasa, tetapi menjadi <strong>solusi</strong> untuk segala kebutuhan event Anda. Dari pra-produksi hingga eksekusi akhir, saya ingin memberikan segalanya secara maksimal.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EXPERTISE / SERVICES SECTION -->
+        <section id="expertise" class="py-24">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-sm font-bold tracking-widest uppercase text-gray-500 mb-3">What I Do</h2>
+                <h3 class="text-4xl md:text-5xl font-bold">Dua Dunia, <span class="text-white italic">Satu Dedikasi.</span></h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Visual / Videography Card -->
+                <div class="glass rounded-3xl p-8 md:p-10 hover-card reveal">
+                    <div class="flex justify-between items-start mb-16">
+                        <div class="w-16 h-16 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white text-2xl">
+                            <i class="ph ph-video-camera"></i>
+                        </div>
+                        <span class="px-4 py-1.5 rounded-full border border-gray-800 text-xs font-medium text-gray-400">Visual</span>
+                    </div>
+                    <h4 class="text-3xl font-bold mb-4">Videography</h4>
+                    <p class="text-gray-400 mb-8 leading-relaxed">
+                        Merekam cerita, emosi, dan pesan di balik setiap momen. Dari konsep kreatif hingga proses editing, saya memastikan setiap frame berbicara.
+                    </p>
+                    <ul class="space-y-3">
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <i class="ph-fill ph-check-circle text-brand-accent2"></i> Commercial Video
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <i class="ph-fill ph-check-circle text-brand-accent2"></i> Pre-wedding Cinematic
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <i class="ph-fill ph-check-circle text-brand-accent2"></i> Behind The Scene (BTS)
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <i class="ph-fill ph-check-circle text-brand-accent2"></i> Event Documentation
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Tech / Web Dev Card -->
+                <div class="glass rounded-3xl p-8 md:p-10 hover-card reveal reveal-delay-1 relative overflow-hidden">
+                    <div class="flex justify-between items-start mb-16 relative z-10">
+                        <div class="w-16 h-16 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white text-2xl">
+                            <i class="ph ph-code-block"></i>
+                        </div>
+                        <span class="px-4 py-1.5 rounded-full border border-gray-800 text-xs font-medium text-gray-400">Tech</span>
+                    </div>
+                    <h4 class="text-3xl font-bold mb-4 relative z-10">Web Development</h4>
+                    <p class="text-gray-400 mb-8 leading-relaxed relative z-10">
+                        Karena visual yang bagus butuh rumah digital yang solid. Saya membangun website modern, interaktif, dan responsif untuk brand dan vendor.
+                    </p>
+                    <ul class="space-y-3 relative z-10">
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <i class="ph-fill ph-check-circle text-brand-accent1"></i> Custom Landing Pages
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <i class="ph-fill ph-check-circle text-brand-accent1"></i> Vendor / Brand Portfolio Sites
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <i class="ph-fill ph-check-circle text-brand-accent1"></i> UI/UX Implementation
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-300">
+                            <i class="ph-fill ph-check-circle text-brand-accent1"></i> HTML, CSS, Modern JS
+                        </li>
+                    </ul>
+                    
+                    <!-- Code background decorative -->
+                    <div class="absolute bottom-0 right-0 opacity-5 text-[10px] font-mono p-4 pointer-events-none">
+                        &lt;div class="creative"&gt;<br>
+                        &nbsp;&nbsp;const passion = "Tech & Visual";<br>
+                        &nbsp;&nbsp;render(magic);<br>
+                        &lt;/div&gt;
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RECENT WORK GALLERY -->
+        <section class="py-24">
+            <div class="flex justify-between items-end mb-10 reveal">
+                <div>
+                    <h2 class="text-4xl font-bold mb-2">Recent Work</h2>
+                    <p class="text-gray-400">Glimpse of my web and video projects.</p>
+                </div>
+            </div>
+
+            <!-- Bento Grid -->
+            <div class="bento-grid">
+                <!-- Item 1: Wide (Web) -->
+                <div class="glass rounded-3xl overflow-hidden bento-wide group cursor-pointer reveal">
+                    <div class="relative h-64 overflow-hidden">
+                        <!-- Placeholder image for Web Design -->
+                        <div class="absolute inset-0 bg-gradient-to-br from-gray-800 to-gray-900"></div>
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop" alt="Web Development Project" class="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700">
+                        <div class="absolute top-4 left-4 glass px-3 py-1 rounded-full text-xs font-semibold backdrop-blur-md">
+                            💻 Web Dev
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-xl font-bold mb-1">Brand Portfolio Website</h4>
+                        <p class="text-sm text-gray-400">UI/UX & Frontend Development for local vendor.</p>
+                    </div>
+                </div>
+
+                <!-- Item 2: Square (Video) -->
+                <div class="glass rounded-3xl overflow-hidden group cursor-pointer reveal reveal-delay-1">
+                    <div class="relative h-64 overflow-hidden">
+                        <!-- Placeholder image for Video/Prewed -->
+                        <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=600&auto=format&fit=crop" alt="Pre-wedding Video" class="w-full h-full object-cover opacity-70 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700">
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                            <div class="w-14 h-14 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-white text-2xl">
+                                <i class="ph-fill ph-play"></i>
+                            </div>
+                        </div>
+                        <div class="absolute top-4 left-4 glass px-3 py-1 rounded-full text-xs font-semibold backdrop-blur-md">
+                            🎥 Pre-wedding
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-xl font-bold mb-1">Jakarta Cinematic Story</h4>
+                        <p class="text-sm text-gray-400">Pre-wedding video production.</p>
+                    </div>
+                </div>
+
+                <!-- Item 3: Square (Video) -->
+                <div class="glass rounded-3xl overflow-hidden group cursor-pointer reveal">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=600&auto=format&fit=crop" alt="Commercial Video" class="w-full h-full object-cover opacity-70 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700">
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                            <div class="w-14 h-14 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-white text-2xl">
+                                <i class="ph-fill ph-play"></i>
+                            </div>
+                        </div>
+                        <div class="absolute top-4 left-4 glass px-3 py-1 rounded-full text-xs font-semibold backdrop-blur-md">
+                            🎬 Commercial
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-xl font-bold mb-1">Product Launch Ad</h4>
+                        <p class="text-sm text-gray-400">Directing and editing for commercial brand.</p>
+                    </div>
+                </div>
+
+                <!-- Item 4: Wide (BTS/Misc) -->
+                <div class="glass rounded-3xl overflow-hidden bento-wide group cursor-pointer reveal reveal-delay-1">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1518131672697-613becd4fab5?q=80&w=800&auto=format&fit=crop" alt="Behind the scene" class="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700">
+                        <div class="absolute top-4 left-4 glass px-3 py-1 rounded-full text-xs font-semibold backdrop-blur-md">
+                            📷 Behind The Scene
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-xl font-bold mb-1">Music Video BTS</h4>
+                        <p class="text-sm text-gray-400">Documenting the raw process of creation.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA / CONTACT SECTION -->
+        <section id="contact" class="py-32">
+            <div class="glass rounded-[3rem] p-10 md:p-20 text-center relative overflow-hidden reveal">
+                <!-- Glowing background for CTA -->
+                <div class="absolute inset-0 bg-gradient-to-b from-transparent to-brand-accent1/10 pointer-events-none"></div>
+                <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-1/2 bg-brand-accent2/20 filter blur-[80px] pointer-events-none"></div>
+
+                <h2 class="text-5xl md:text-7xl font-bold mb-6 relative z-10 tracking-tight">Let's create <br><span class="text-gray-500 italic">something great.</span></h2>
+                <p class="text-xl text-gray-400 max-w-2xl mx-auto mb-12 relative z-10">
+                    Tertarik untuk bekerja sama? Saya siap memberikan usaha maksimal untuk kebutuhan visual dan teknologi acara Anda.
+                </p>
+
+                <div class="flex flex-col sm:flex-row justify-center items-center gap-6 relative z-10">
+                    <!-- Email Button -->
+                    <a href="mailto:admin@colorizevisual.com" class="group flex items-center gap-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full pl-6 pr-2 py-2 transition-all w-full sm:w-auto">
+                        <div class="text-left">
+                            <span class="block text-xs text-gray-400 font-medium">Email Me</span>
+                            <span class="block font-semibold">admin@colorizevisual.com</span>
+                        </div>
+                        <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-black group-hover:rotate-45 transition-transform">
+                            <i class="ph-bold ph-arrow-up-right text-xl"></i>
+                        </div>
+                    </a>
+
+                    <!-- WhatsApp Button -->
+                    <a href="https://wa.me/62895345902896" target="_blank" class="group flex items-center gap-4 bg-[#25D366]/10 hover:bg-[#25D366]/20 border border-[#25D366]/30 rounded-full pl-6 pr-2 py-2 transition-all w-full sm:w-auto">
+                        <div class="text-left">
+                            <span class="block text-xs text-[#25D366] font-medium">WhatsApp</span>
+                            <span class="block font-semibold">0895-3459-02896</span>
+                        </div>
+                        <div class="w-12 h-12 bg-[#25D366] rounded-full flex items-center justify-center text-white group-hover:scale-110 transition-transform">
+                            <i class="ph-fill ph-whatsapp-logo text-2xl"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="pt-10 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-gray-500 text-sm reveal">
+            <p>&copy; <script>document.write(new Date().getFullYear())</script> Theofilus. All rights reserved.</p>
+            <div class="flex items-center gap-2">
+                <span>Built for</span>
+                <span class="font-bold text-white flex items-center gap-1">
+                    <i class="ph-fill ph-aperture text-brand-accent2"></i> Colorize Visual
+                </span>
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- Interactive Scripts -->
+    <script>
+        // 1. Scroll Reveal Animation Logic
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealCallback = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    // Optional: Stop observing once revealed
+                    // observer.unobserve(entry.target);
+                }
+            });
+        };
+
+        const revealOptions = {
+            threshold: 0.1, // Trigger when 10% of element is visible
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const revealObserver = new IntersectionObserver(revealCallback, revealOptions);
+        
+        revealElements.forEach(el => {
+            revealObserver.observe(el);
+        });
+
+        // 2. Custom Glowing Cursor Follower
+        const cursorGlow = document.getElementById('cursor-glow');
+        
+        // Only enable on non-touch devices
+        if (window.matchMedia("(pointer: fine)").matches) {
+            document.addEventListener('mousemove', (e) => {
+                // Use requestAnimationFrame for smoother performance
+                requestAnimationFrame(() => {
+                    cursorGlow.style.left = e.clientX + 'px';
+                    cursorGlow.style.top = e.clientY + 'px';
+                });
+            });
+
+            // Make glow smaller when hovering over interactive elements
+            const interactables = document.querySelectorAll('a, button, .hover-card');
+            interactables.forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    cursorGlow.style.width = '150px';
+                    cursorGlow.style.height = '150px';
+                });
+                el.addEventListener('mouseleave', () => {
+                    cursorGlow.style.width = '300px';
+                    cursorGlow.style.height = '300px';
+                });
+            });
+        } else {
+            // Hide custom cursor on mobile/touch devices
+            cursorGlow.style.display = 'none';
+        }
+    </script>
+</body>
+</html>
+
+
+### Fitur Utama dalam Kode Ini:
+1. **Satu File Siap Pakai:** File ini sudah mencakup HTML, CSS (menggunakan Tailwind via CDN untuk efisiensi styling), dan JavaScript. Anda tinggal *copy-paste* kode ini ke dalam file `index.html` dan letakkan di folder `/theofilus` pada server Anda.
+2. **Animasi & Efek Modern:** - Dilengkapi *Scroll Reveal* (elemen muncul perlahan saat di-scroll) menggunakan Intersection Observer API (sangat ringan).
+   - Efek kursor *Glow* yang mengikuti *mouse* (hanya aktif di desktop) memberikan kesan "Tech" yang kuat.
+   - Efek *Glassmorphism* (blur) pada kartu dan navigasi bawah.
+3. **Pembagian Cerita (Storytelling):** - Saya membagi keahlian Anda ke dalam konsep "Dua Dunia, Satu Dedikasi": **Visual** (Videography) dan **Tech** (Web Development).
+   - Ada *section* khusus untuk menyampaikan *core value* / mimpi besar dari **Colorize Visual** (*"Touch your event more"*).
+4. **Call to Action Lengkap:** Di bagian bawah (dan di navigasi) terdapat tombol besar bergaya *modern pill* yang langsung menghubungkan klien ke Email dan WhatsApp Anda.
+
+Semoga desain ini sesuai dengan visi *Tech & Visual* Anda! Jika ingin mengubah foto, Anda cukup mengganti link `img src="..."` yang ada di dalam kode HTML tersebut dengan link foto portofolio asli Anda.
