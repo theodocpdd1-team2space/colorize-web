@@ -44,8 +44,8 @@ const Footer = () => {
           <h4 className={styles.heading}>{t.contact}</h4>
           <ul className={styles.linkList}>
             <li>Surabaya, East Java, Indonesia</li>
-            <li><a href={whatsappUrl} target="_blank" rel="noreferrer">WhatsApp: 0895-3459-02896</a></li>
-            <li><a href="mailto:hello@colorizevisual.com">hello@colorizevisual.com</a></li>
+            <li><a href={whatsappUrl} target="_blank" rel="noreferrer">WhatsApp: 0895345902896</a></li>
+            <li><a href="mailto:theofilus267@gmail.com">theofilus267@gmail.com</a></li>
             <li><a href="https://instagram.com/colorizevisual" target="_blank" rel="noreferrer">Instagram: @colorizevisual</a></li>
           </ul>
         </div>

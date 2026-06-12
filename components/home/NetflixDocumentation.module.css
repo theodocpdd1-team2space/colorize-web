@@ -1,0 +1,135 @@
+.section {
+  position: relative;
+  overflow: hidden;
+  padding: 6rem 5%;
+  background:
+    linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 48%, var(--bg-secondary) 100%);
+}
+
+.container {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header {
+  max-width: 850px;
+  margin: 0 auto 3rem;
+  text-align: center;
+}
+
+.heading {
+  font-family: var(--font-sora);
+  font-size: clamp(2.5rem, 5vw, 5rem);
+  font-weight: 800;
+  line-height: 1.02;
+  color: var(--text-primary);
+  text-wrap: balance;
+}
+
+.subtitle {
+  max-width: 720px;
+  margin: 1.35rem auto 2.25rem;
+  color: rgba(255, 255, 255, 0.76);
+  font-size: clamp(1rem, 1.45vw, 1.2rem);
+  line-height: 1.7;
+  text-wrap: balance;
+}
+
+.cta {
+  display: inline-flex;
+  min-height: 54px;
+  align-items: center;
+  justify-content: center;
+  padding: 0.9rem 2rem;
+  border: 1px solid var(--accent-primary);
+  border-radius: 6px;
+  background: var(--accent-primary);
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 800;
+  transition: background 0.25s ease, border-color 0.25s ease,
+    box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.cta:hover {
+  border-color: var(--accent-secondary);
+  background: var(--accent-secondary);
+  box-shadow: 0 14px 34px rgba(255, 106, 0, 0.28);
+  transform: translateY(-2px);
+}
+
+.cta:focus-visible {
+  outline: 3px solid rgba(255, 154, 61, 0.55);
+  outline-offset: 4px;
+}
+
+.videoFrame {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 18px;
+  background: #050505;
+  box-shadow:
+    0 28px 70px rgba(0, 0, 0, 0.55),
+    0 0 64px rgba(255, 106, 0, 0.16);
+}
+
+.videoFrame::before {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  content: "";
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 1px rgba(255, 154, 61, 0.12);
+  pointer-events: none;
+}
+
+.video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.videoOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(180deg, rgba(5, 5, 5, 0.08), rgba(5, 5, 5, 0.18)),
+    linear-gradient(90deg, rgba(255, 106, 0, 0.12), transparent 28%, transparent 72%, rgba(255, 106, 0, 0.1));
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 4.5rem 5%;
+  }
+
+  .header {
+    margin-bottom: 2.25rem;
+  }
+
+  .heading {
+    font-size: clamp(2.25rem, 11vw, 4rem);
+    line-height: 1.08;
+  }
+
+  .subtitle {
+    margin-bottom: 2rem;
+    font-size: 0.98rem;
+    line-height: 1.65;
+  }
+
+  .cta {
+    width: min(100%, 320px);
+    min-height: 56px;
+  }
+
+  .videoFrame {
+    border-radius: 14px;
+  }
+}
