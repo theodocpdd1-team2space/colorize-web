@@ -3,6 +3,7 @@ import ClientMarquee from "@/components/home/ClientMarquee";
 import WhyChooseUs from "@/components/home/WhyChooseUs";
 import AboutTheo from "@/components/home/AboutTheo";
 import ServicesList from "@/components/home/ServicesList";
+import ProductionCarousel from "@/components/home/ProductionCarousel";
 import NetflixDocumentation from "@/components/home/NetflixDocumentation";
 import FeaturedWorks from "@/components/home/FeaturedWorks";
 import HowWeWork from "@/components/home/HowWeWork";
@@ -18,6 +19,7 @@ export default function Home() {
       <ClientMarquee />
       <WhyChooseUs />
       <ServicesList />
+      <ProductionCarousel />
       <NetflixDocumentation />
       <FeaturedWorks />
       <HowWeWork />
