@@ -83,7 +83,7 @@
     (100% - (var(--carousel-gap) * (var(--visible-count) - 1))) /
       var(--visible-count)
   );
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 4 / 5;
   min-width: 0;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -113,7 +113,7 @@
 
 .image {
   object-fit: cover;
-  object-position: center;
+  object-position: center center;
   transition: transform 0.55s ease;
   user-select: none;
 }
