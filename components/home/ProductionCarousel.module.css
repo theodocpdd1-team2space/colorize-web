@@ -1,38 +1,27 @@
 .section {
   position: relative;
   overflow: hidden;
-  padding: 6rem 0;
+  padding: 6rem 5%;
   background:
     linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 54%, var(--bg-secondary) 100%);
 }
 
-.section::before,
-.section::after {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  z-index: 3;
-  width: min(10vw, 140px);
-  content: "";
-  pointer-events: none;
-}
-
 .section::before {
-  left: 0;
-  background: linear-gradient(90deg, var(--bg-secondary), rgba(5, 5, 5, 0));
-}
-
-.section::after {
-  right: 0;
-  background: linear-gradient(270deg, var(--bg-secondary), rgba(5, 5, 5, 0));
+  position: absolute;
+  top: 8%;
+  right: -8rem;
+  width: 24rem;
+  height: 24rem;
+  content: "";
+  background: radial-gradient(circle, rgba(255, 106, 0, 0.14), transparent 68%);
+  pointer-events: none;
 }
 
 .container {
   position: relative;
-  z-index: 4;
+  z-index: 1;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 5%;
 }
 
 .header {
@@ -61,36 +50,44 @@
 
 .carousel {
   position: relative;
-  z-index: 2;
-  width: 100%;
+}
+
+.viewport {
+  --carousel-gap: 1.5rem;
+  --visible-count: 3;
+
   overflow: hidden;
+  border-radius: 20px;
+  cursor: grab;
+  touch-action: pan-y;
+}
+
+.viewport:active {
+  cursor: grabbing;
 }
 
 .track {
   display: flex;
-  width: max-content;
-  animation: slideProduction 58s linear infinite;
+  gap: var(--carousel-gap);
+  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
   will-change: transform;
 }
 
-.carousel:hover .track {
-  animation-play-state: paused;
-}
-
-.slideGroup {
-  display: flex;
-  flex: 0 0 auto;
-  gap: 1.35rem;
-  padding-right: 1.35rem;
+.noTransition {
+  transition: none;
 }
 
 .card {
   position: relative;
-  flex: 0 0 auto;
-  height: clamp(260px, 34vw, 430px);
+  flex: 0 0 calc(
+    (100% - (var(--carousel-gap) * (var(--visible-count) - 1))) /
+      var(--visible-count)
+  );
+  aspect-ratio: 16 / 9;
+  min-width: 0;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 18px;
+  border-radius: 20px;
   background: #050505;
   box-shadow: 0 22px 52px rgba(0, 0, 0, 0.38);
   transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
@@ -101,8 +98,8 @@
   inset: 0;
   content: "";
   background:
-    linear-gradient(180deg, rgba(5, 5, 5, 0.04), rgba(5, 5, 5, 0.22)),
-    linear-gradient(90deg, rgba(255, 106, 0, 0.12), transparent 35%, transparent 100%);
+    linear-gradient(180deg, rgba(5, 5, 5, 0.03), rgba(5, 5, 5, 0.22)),
+    linear-gradient(90deg, rgba(255, 106, 0, 0.12), transparent 38%);
   pointer-events: none;
 }
 
@@ -114,49 +111,97 @@
   transform: translateY(-4px);
 }
 
-.wide {
-  width: clamp(320px, 42vw, 560px);
-}
-
-.standard {
-  width: clamp(280px, 34vw, 450px);
-}
-
-.portrait {
-  width: clamp(220px, 27vw, 340px);
-}
-
 .image {
   object-fit: cover;
+  object-position: center;
   transition: transform 0.55s ease;
+  user-select: none;
 }
 
 .card:hover .image {
   transform: scale(1.04);
 }
 
-@keyframes slideProduction {
-  from {
-    transform: translateX(0);
-  }
+.navButton {
+  position: absolute;
+  top: 50%;
+  z-index: 4;
+  display: inline-flex;
+  width: 48px;
+  height: 48px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+  background: rgba(17, 17, 17, 0.56);
+  color: #ffffff;
+  font-size: 2rem;
+  line-height: 1;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.34);
+  transform: translateY(-50%);
+  transition: border-color 0.25s ease, background 0.25s ease,
+    box-shadow 0.25s ease, color 0.25s ease;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
 
-  to {
-    transform: translateX(-50%);
+.navButton:hover {
+  border-color: rgba(255, 106, 0, 0.56);
+  background: rgba(255, 106, 0, 0.16);
+  color: var(--accent-secondary);
+  box-shadow:
+    0 16px 36px rgba(0, 0, 0, 0.42),
+    0 0 28px rgba(255, 106, 0, 0.18);
+}
+
+.navButton:focus-visible,
+.dot:focus-visible {
+  outline: 3px solid rgba(255, 154, 61, 0.55);
+  outline-offset: 4px;
+}
+
+.prevButton {
+  left: -1.5rem;
+}
+
+.nextButton {
+  right: -1.5rem;
+}
+
+.dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  margin-top: 2rem;
+}
+
+.dot {
+  width: 0.65rem;
+  height: 0.65rem;
+  border: 1px solid rgba(255, 255, 255, 0.26);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.18);
+  transition: width 0.25s ease, border-color 0.25s ease,
+    background 0.25s ease, box-shadow 0.25s ease;
+}
+
+.activeDot {
+  width: 2rem;
+  border-color: rgba(255, 106, 0, 0.8);
+  background: var(--accent-primary);
+  box-shadow: 0 0 22px rgba(255, 106, 0, 0.3);
+}
+
+@media (max-width: 1100px) {
+  .viewport {
+    --visible-count: 2;
   }
 }
 
 @media (max-width: 768px) {
   .section {
-    padding: 4.5rem 0;
-  }
-
-  .section::before,
-  .section::after {
-    width: 3rem;
-  }
-
-  .container {
-    padding: 0 1.25rem;
+    padding: 4.5rem 5%;
   }
 
   .header {
@@ -173,44 +218,36 @@
     line-height: 1.65;
   }
 
-  .track {
-    animation-duration: 46s;
+  .viewport {
+    --carousel-gap: 1rem;
+    --visible-count: 1;
   }
 
-  .slideGroup {
-    gap: 1rem;
-    padding-right: 1rem;
+  .navButton {
+    width: 42px;
+    height: 42px;
+    font-size: 1.65rem;
   }
 
-  .card {
-    height: clamp(240px, 72vw, 340px);
-    border-radius: 18px;
+  .prevButton {
+    left: 0.75rem;
   }
 
-  .wide {
-    width: min(78vw, 380px);
+  .nextButton {
+    right: 0.75rem;
   }
 
-  .standard {
-    width: min(72vw, 340px);
-  }
-
-  .portrait {
-    width: min(58vw, 270px);
+  .dots {
+    margin-top: 1.5rem;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .track {
-    animation: none;
-  }
-
-  .carousel {
-    overflow-x: auto;
-    scrollbar-width: none;
-  }
-
-  .carousel::-webkit-scrollbar {
-    display: none;
+  .track,
+  .card,
+  .image,
+  .navButton,
+  .dot {
+    transition: none;
   }
 }
