@@ -40,7 +40,9 @@
 }
 
 .content {
-  width: min(100%, 720px);
+  width: min(900px, 90vw);
+  overflow: visible;
+  padding-right: 0.12em;
 }
 
 .eyebrow {
@@ -54,13 +56,17 @@
 }
 
 .heading {
-  max-width: 720px;
+  max-width: 880px;
   font-family: var(--font-sora);
-  font-size: clamp(2.8rem, 6vw, 6rem);
+  font-size: clamp(2.8rem, 5.3vw, 5.35rem);
   font-weight: 600;
-  line-height: 0.98;
+  line-height: 1;
   color: #ffffff;
   letter-spacing: 0;
+  overflow: visible;
+  word-break: normal;
+  overflow-wrap: normal;
+  white-space: normal;
   text-wrap: balance;
 }
 
@@ -137,8 +143,9 @@
   }
 
   .heading {
-    font-size: clamp(2.45rem, 11vw, 3.65rem);
-    line-height: 1;
+    max-width: 100%;
+    font-size: clamp(2.25rem, 9.5vw, 3.35rem);
+    line-height: 1.03;
   }
 
   .subtitle {

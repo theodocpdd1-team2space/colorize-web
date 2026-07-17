@@ -36,7 +36,7 @@ const NetflixDocumentation = () => {
       </div>
       <div className={styles.videoOverlay} />
 
-      <Reveal className={styles.content} variant="text">
+      <Reveal className={styles.content}>
         <p className={styles.eyebrow}>{t.eyebrow}</p>
         <h2 id="netflix-title" className={styles.heading}>
           {t.heading}
