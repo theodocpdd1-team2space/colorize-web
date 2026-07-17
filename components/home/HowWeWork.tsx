@@ -2,6 +2,7 @@
 
 import React from "react";
 import { useLanguage } from "@/app/context/LanguageContext";
+import Reveal from "@/components/common/Reveal";
 import styles from "./HowWeWork.module.css";
 
 const HowWeWork = () => {
@@ -9,16 +10,17 @@ const HowWeWork = () => {
 
   const content = {
     id: {
-      heading: "How We Work",
+      eyebrow: "Cara kerja",
+      heading: "Proses yang rapi membuat hari-H lebih tenang.",
       steps: [
         {
           num: "01",
-          title: "Consultation",
-          desc: "Klien menjelaskan kebutuhan acara, lokasi, platform streaming, jumlah kamera, output, dan kebutuhan display."
+          title: "Konsultasi",
+          desc: "Kami memahami detail acara, venue, rundown, platform streaming, jumlah kamera, dan kebutuhan display."
         },
         {
           num: "02",
-          title: "Technical Planning",
+          title: "Perencanaan Teknis",
           desc: "Tim Colorize Visual merancang kebutuhan alat, crew, workflow video, audio, dan output."
         },
         {
@@ -28,7 +30,7 @@ const HowWeWork = () => {
         },
         {
           num: "04",
-          title: "Live Operation",
+          title: "Operasional Live",
           desc: "Tim menjalankan proses live streaming, switching, monitoring, dan troubleshooting selama acara."
         },
         {
@@ -39,7 +41,8 @@ const HowWeWork = () => {
       ]
     },
     en: {
-      heading: "How We Work",
+      eyebrow: "How we work",
+      heading: "A clean process keeps event day calmer.",
       steps: [
         {
           num: "01",
@@ -74,7 +77,8 @@ const HowWeWork = () => {
 
   return (
     <section className={styles.section}>
-      <div className={styles.container}>
+      <Reveal className={styles.container}>
+        <p className={styles.eyebrow}>{t.eyebrow}</p>
         <h2 className={styles.heading}>{t.heading}</h2>
         
         <div className={styles.timeline}>
@@ -88,7 +92,7 @@ const HowWeWork = () => {
             </div>
           ))}
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 };

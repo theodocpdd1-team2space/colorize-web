@@ -4,6 +4,9 @@ import "./globals.css";
 import { LanguageProvider } from "./context/LanguageContext";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import FloatingWhatsApp from "@/components/layout/FloatingWhatsApp";
+import JsonLd from "@/components/seo/JsonLd";
+import { defaultMetadata, organizationJsonLd, websiteJsonLd } from "./seo";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -17,10 +20,7 @@ const sora = Sora({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  title: "Colorize Visual | Live Streaming & Multimedia Production",
-  description: "Professional live streaming and multimedia solutions based in Surabaya. We deliver broadcast-ready solutions for events, worship, corporate meetings, weddings, and multimedia installations.",
-};
+export const metadata: Metadata = defaultMetadata;
 
 export default function RootLayout({
   children,
@@ -30,9 +30,11 @@ export default function RootLayout({
   return (
     <html lang="id" className={`${inter.variable} ${sora.variable}`}>
       <body className={inter.className}>
+        <JsonLd data={[organizationJsonLd, websiteJsonLd]} />
         <LanguageProvider>
           <Navbar />
           {children}
+          <FloatingWhatsApp />
           <Footer />
         </LanguageProvider>
       </body>

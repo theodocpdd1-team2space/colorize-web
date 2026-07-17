@@ -3,6 +3,8 @@
 import Image from "next/image";
 import type { PointerEvent, TransitionEvent } from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useLanguage } from "@/app/context/LanguageContext";
+import Reveal from "@/components/common/Reveal";
 import styles from "./ProductionCarousel.module.css";
 
 const photos = [
@@ -34,6 +36,7 @@ const autoplayDelay = 4000;
 const swipeThreshold = 44;
 
 const ProductionCarousel = () => {
+  const { language } = useLanguage();
   const viewportRef = useRef<HTMLDivElement | null>(null);
   const trackRef = useRef<HTMLDivElement | null>(null);
   const firstCardRef = useRef<HTMLElement | null>(null);
@@ -147,17 +150,55 @@ const ProductionCarousel = () => {
     goToPrevious();
   };
 
+  const copy = {
+    id: {
+      heading: "Dibangun dari setup sampai live.",
+      subtitle:
+        "Setup dibuat jelas dari kamera, audio, preview monitor, sampai output streaming.",
+      stats: [
+        ["01", "Brief & rundown"],
+        ["02", "Setup multicam"],
+        ["03", "Live operation"],
+      ],
+      previous: "Foto produksi sebelumnya",
+      next: "Foto produksi berikutnya",
+      show: "Tampilkan foto produksi",
+    },
+    en: {
+      heading: "Built from setup to live.",
+      subtitle:
+        "Camera, audio, preview monitor, and streaming output are prepared as one clear workflow.",
+      stats: [
+        ["01", "Brief & rundown"],
+        ["02", "Multicam setup"],
+        ["03", "Live operation"],
+      ],
+      previous: "Previous production photo",
+      next: "Next production photo",
+      show: "Show production photo",
+    },
+  };
+
+  const t = copy[language];
+
   return (
     <section className={styles.section}>
-      <div className={styles.container}>
+      <Reveal className={styles.container}>
         <div className={styles.header}>
-          <h2 className={styles.heading}>
-            Behind Every Clean Broadcast, There&apos;s a Solid Workflow
-          </h2>
-          <p className={styles.subtitle}>
-            From camera setup, switching, monitoring, to live output — our team
-            prepares every detail so your event looks professional on screen.
-          </p>
+          <div>
+            <h2 className={styles.heading}>{t.heading}</h2>
+          </div>
+          <div className={styles.headerAside}>
+            <p className={styles.subtitle}>{t.subtitle}</p>
+            <dl className={styles.stats}>
+              {t.stats.map(([number, text]) => (
+                <div className={styles.stat} key={number}>
+                  <dt>{number}</dt>
+                  <dd>{text}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
         </div>
 
         <div
@@ -169,7 +210,7 @@ const ProductionCarousel = () => {
             className={`${styles.navButton} ${styles.prevButton}`}
             type="button"
             onClick={goToPrevious}
-            aria-label="Previous production photo"
+            aria-label={t.previous}
           >
             <span aria-hidden="true">‹</span>
           </button>
@@ -216,7 +257,7 @@ const ProductionCarousel = () => {
             className={`${styles.navButton} ${styles.nextButton}`}
             type="button"
             onClick={goToNext}
-            aria-label="Next production photo"
+            aria-label={t.next}
           >
             <span aria-hidden="true">›</span>
           </button>
@@ -230,13 +271,13 @@ const ProductionCarousel = () => {
               }`}
               type="button"
               onClick={() => goToSlide(index)}
-              aria-label={`Show production photo ${index + 1}`}
+              aria-label={`${t.show} ${index + 1}`}
               aria-current={activeIndex === index}
               key={photo.src}
             />
           ))}
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 };

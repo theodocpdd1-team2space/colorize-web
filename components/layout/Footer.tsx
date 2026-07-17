@@ -18,6 +18,13 @@ const Footer = () => {
     links: language === "id" ? "Tautan" : "Quick Links",
     contact: language === "id" ? "Kontak" : "Contact",
     rights: language === "id" ? "Hak Cipta Dilindungi" : "All Rights Reserved",
+    location: "Surabaya, Indonesia",
+    nav: {
+      home: language === "id" ? "Beranda" : "Home",
+      about: language === "id" ? "Tentang Kami" : "About Us",
+      services: language === "id" ? "Layanan" : "Services",
+      works: language === "id" ? "Karya" : "Portfolio",
+    },
   };
 
   return (
@@ -33,20 +40,19 @@ const Footer = () => {
         <div className={styles.linksSection}>
           <h4 className={styles.heading}>{t.links}</h4>
           <ul className={styles.linkList}>
-            <li><Link href="/">Home</Link></li>
-            <li><Link href="/about">About Us</Link></li>
-            <li><Link href="/services">Services</Link></li>
-            <li><Link href="/works">Portfolio</Link></li>
+            <li><Link href="/">{t.nav.home}</Link></li>
+            <li><Link href="/about">{t.nav.about}</Link></li>
+            <li><Link href="/services">{t.nav.services}</Link></li>
+            <li><Link href="/works">{t.nav.works}</Link></li>
           </ul>
         </div>
         
         <div className={styles.contactSection}>
           <h4 className={styles.heading}>{t.contact}</h4>
           <ul className={styles.linkList}>
-            <li>Surabaya, East Java, Indonesia</li>
+            <li>{t.location}</li>
             <li><a href={whatsappUrl} target="_blank" rel="noreferrer">WhatsApp: 0895345902896</a></li>
             <li><a href="mailto:theofilus267@gmail.com">theofilus267@gmail.com</a></li>
-            <li><a href="https://instagram.com/colorizevisual" target="_blank" rel="noreferrer">Instagram: @colorizevisual</a></li>
           </ul>
         </div>
       </div>

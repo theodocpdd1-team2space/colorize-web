@@ -1,6 +1,7 @@
 .section {
   padding: 6rem 5%;
-  background: var(--bg-secondary);
+  background: var(--color-off-white);
+  color: var(--color-black);
 }
 
 .container {
@@ -10,9 +11,10 @@
 
 .heading {
   font-family: var(--font-sora);
-  font-size: clamp(2rem, 3vw, 2.5rem);
+  font-size: 2.35rem;
+  font-weight: 600;
   text-align: center;
-  color: var(--text-primary);
+  color: var(--color-black);
   margin-bottom: 4rem;
 }
 
@@ -23,8 +25,8 @@
 }
 
 .faqItem {
-  background: var(--bg-primary);
-  border: 1px solid var(--glass-border);
+  background: transparent;
+  border: 1px solid rgba(5, 5, 5, 0.12);
   border-radius: 8px;
   overflow: hidden;
   transition: border-color 0.3s ease;
@@ -43,7 +45,7 @@
   font-family: var(--font-sora);
   font-size: 1.1rem;
   font-weight: 600;
-  color: var(--text-primary);
+  color: var(--color-black);
   text-align: left;
   transition: color 0.3s ease;
 }
@@ -65,7 +67,7 @@
 
 .answerContent {
   padding: 0 1.5rem 1.5rem;
-  color: var(--text-secondary);
+  color: rgba(5, 5, 5, 0.68);
   line-height: 1.6;
   font-size: 0.95rem;
 }

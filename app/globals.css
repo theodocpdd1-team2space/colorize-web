@@ -1,14 +1,22 @@
 :root {
+  --color-black: #050505;
+  --color-off-white: #f4f1ea;
+  --color-off-white-alt: #f5f5f0;
+  --color-orange: #ff5a00;
+  --color-orange-soft: #ff6a00;
+  --color-white: #ffffff;
+  --color-muted: #8f8f87;
+
   /* Core Colors */
-  --bg-primary: #050505;
+  --bg-primary: var(--color-black);
   --bg-secondary: #111111;
-  --bg-tertiary: #1A1A1A;
+  --bg-tertiary: #1a1a1a;
   
-  --accent-primary: #FF6A00;
-  --accent-secondary: #FF9A3D;
+  --accent-primary: var(--color-orange-soft);
+  --accent-secondary: #ff8a2a;
   
-  --text-primary: #FFFFFF;
-  --text-secondary: #B8B8B8;
+  --text-primary: var(--color-white);
+  --text-secondary: #b8b8b8;
   --text-muted: #707070;
 
   /* UI Tokens */
@@ -23,6 +31,7 @@
 html {
   scroll-behavior: smooth;
   height: 100%;
+  background: var(--color-black);
 }
 
 html,
@@ -38,6 +47,8 @@ body {
   color: var(--foreground);
   background: var(--background);
   /* Fonts will be injected via next/font in layout.tsx */
+  font-size: 16px;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -67,8 +78,13 @@ button {
 /* Base Heading Styles */
 h1, h2, h3, h4, h5, h6 {
   color: var(--text-primary);
-  font-weight: 700;
-  line-height: 1.2;
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: 0;
+}
+
+p {
+  line-height: 1.6;
 }
 
 /* Utilities */
@@ -84,4 +100,20 @@ h1, h2, h3, h4, h5, h6 {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+::selection {
+  background: var(--accent-primary);
+  color: var(--color-white);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }

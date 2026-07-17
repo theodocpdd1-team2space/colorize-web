@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useLanguage } from "@/app/context/LanguageContext";
 import styles from "./ClientMarquee.module.css";
 
 const logos = [
@@ -13,18 +14,31 @@ const logos = [
 ];
 
 export default function ClientMarquee() {
+  const { language } = useLanguage();
   const repeatedLogos = [...logos, ...logos];
+  const copy = {
+    id: {
+      label: "Dipercaya oleh partner event dan institusi",
+      heading: "Workflow broadcast yang sudah hadir di berbagai event.",
+      subheading:
+        "Sekolah, brand, wedding, sport event, dan partner produksi mempercayakan kebutuhan live streaming, multicam, dan multimedia pada Colorize Visual.",
+    },
+    en: {
+      label: "Trusted by event partners and institutions",
+      heading: "Broadcast workflows built for real events.",
+      subheading:
+        "Schools, brands, weddings, sport events, and production partners trust Colorize Visual for live streaming, multicam, and multimedia needs.",
+    },
+  };
+  const t = copy[language];
 
   return (
     <section className={styles.section}>
       <div className={styles.container}>
         <div className={styles.header}>
-          <h2 className={styles.heading}>
-            A Trusted Creative Partner for Schools, Brands, and Event Leaders
-          </h2>
-          <p className={styles.subheading}>
-            Colorize Visual has supported live streaming, multicam, and multimedia production for schools, brands, weddings, and event partners.
-          </p>
+          <p className={styles.label}>{t.label}</p>
+          <h2 className={styles.heading}>{t.heading}</h2>
+          <p className={styles.subheading}>{t.subheading}</p>
         </div>
 
         <div className={styles.logoMarquee}>

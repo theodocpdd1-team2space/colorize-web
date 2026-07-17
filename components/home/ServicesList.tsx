@@ -2,6 +2,7 @@
 
 import React from "react";
 import { useLanguage } from "@/app/context/LanguageContext";
+import Reveal from "@/components/common/Reveal";
 import styles from "./ServicesList.module.css";
 
 const ServicesList = () => {
@@ -9,104 +10,113 @@ const ServicesList = () => {
 
   const content = {
     id: {
-      heading: "Our Services",
+      eyebrow: "Layanan produksi",
+      heading: "Satu tim untuk visual, siaran, dan sistem event.",
+      body:
+        "Pilih kebutuhan utama. Kami susun workflow yang pas untuk venue, rundown, dan output acara.",
       services: [
         {
-          title: "Live Streaming Production",
-          desc: "Untuk wedding, ibadah, seminar, hybrid meeting, graduation, launching, dan event lainnya.",
-          features: ["Multi-camera live streaming", "YouTube / Zoom / Instagram / TikTok support", "Audio routing", "Recording", "Operator & crew"]
+          title: "Live Streaming",
+          desc: "Siaran live untuk wedding, sekolah, ibadah, seminar, launching, dan event hybrid.",
+          features: ["YouTube, Zoom, Instagram, TikTok", "Rekaman", "Operator dan crew"],
+        },
+        {
+          title: "Multicam Production",
+          desc: "Produksi multi-kamera dengan switching rapi untuk momen penting dan acara berdurasi panjang.",
+          features: ["Switching kamera", "Preview monitor", "Output program"],
         },
         {
           title: "Broadcasting System",
-          desc: "Untuk kebutuhan produksi visual yang lebih kompleks.",
-          features: ["Camera switching", "Video routing", "Program output", "Multiview monitoring", "Broadcast workflow planning"]
+          desc: "Workflow broadcast untuk venue, corporate studio, gereja, sekolah, atau ruang produksi.",
+          features: ["Routing video", "Monitoring multiview", "Perencanaan output"],
         },
         {
           title: "Multimedia Installation",
-          desc: "Untuk gereja, kantor, aula, sekolah, dan venue.",
-          features: ["Camera system installation", "Display output planning", "Audio visual integration", "Cable management", "Operator training"]
+          desc: "Instalasi audio visual, kamera, display, dan sistem kontrol untuk kebutuhan jangka panjang.",
+          features: ["Sistem kamera", "Output display", "Manajemen kabel"],
         },
         {
           title: "Videotron & LED Display",
-          desc: "Untuk event dan instalasi display visual.",
-          features: ["LED screen setup", "Visual output management", "Media server support", "Presentation display", "Event screen control"]
+          desc: "Output visual untuk layar LED, videotron, projector, TV, dan kebutuhan display event.",
+          features: ["Setup LED", "Output visual", "Kontrol layar"],
         },
         {
           title: "Hybrid Event Solution",
-          desc: "Untuk acara yang butuh offline dan online bersamaan.",
-          features: ["Zoom integration", "YouTube live", "Projector / LED output", "Speaker display", "Recording & documentation"]
+          desc: "Setup acara offline dan online dalam satu sistem agar audience venue dan online tetap terhubung.",
+          features: ["Integrasi Zoom", "Display speaker", "Output streaming"],
         },
-        {
-          title: "Custom Broadcast Setup",
-          desc: "Untuk kebutuhan khusus.",
-          features: ["Church broadcast", "Corporate studio", "Podcast video setup", "Training room streaming", "Remote production planning"]
-        }
-      ]
+      ],
     },
     en: {
-      heading: "Our Services",
+      eyebrow: "Production services",
+      heading: "One team for visuals, broadcast, and event systems.",
+      body:
+        "Choose the core need. We build the right workflow for your venue, rundown, and event output.",
       services: [
         {
-          title: "Live Streaming Production",
-          desc: "For weddings, worships, seminars, hybrid meetings, graduations, product launches, and other events.",
-          features: ["Multi-camera live streaming", "YouTube / Zoom / Instagram / TikTok support", "Audio routing", "Recording", "Operator & crew"]
+          title: "Live Streaming",
+          desc: "Live broadcast for weddings, schools, worship services, seminars, launches, and hybrid events.",
+          features: ["YouTube, Zoom, Instagram, TikTok", "Recording", "Operator and crew"],
+        },
+        {
+          title: "Multicam Production",
+          desc: "Multi-camera production with clean switching for important moments and long-form events.",
+          features: ["Camera switching", "Preview monitor", "Program output"],
         },
         {
           title: "Broadcasting System",
-          desc: "For more complex visual production needs.",
-          features: ["Camera switching", "Video routing", "Program output", "Multiview monitoring", "Broadcast workflow planning"]
+          desc: "Broadcast workflows for venues, corporate studios, churches, schools, or production rooms.",
+          features: ["Video routing", "Multiview monitoring", "Output planning"],
         },
         {
           title: "Multimedia Installation",
-          desc: "For churches, offices, halls, schools, and venues.",
-          features: ["Camera system installation", "Display output planning", "Audio visual integration", "Cable management", "Operator training"]
+          desc: "Audio visual, camera, display, and control system installation for long-term needs.",
+          features: ["Camera system", "Display output", "Cable management"],
         },
         {
           title: "Videotron & LED Display",
-          desc: "For events and visual display installations.",
-          features: ["LED screen setup", "Visual output management", "Media server support", "Presentation display", "Event screen control"]
+          desc: "Visual output for LED screens, videotron, projectors, TVs, and event display needs.",
+          features: ["LED setup", "Visual output", "Screen control"],
         },
         {
           title: "Hybrid Event Solution",
-          desc: "For events requiring simultaneous offline and online engagement.",
-          features: ["Zoom integration", "YouTube live", "Projector / LED output", "Speaker display", "Recording & documentation"]
+          desc: "Offline and online event setup in one system so venue and remote audiences stay connected.",
+          features: ["Zoom integration", "Speaker display", "Streaming output"],
         },
-        {
-          title: "Custom Broadcast Setup",
-          desc: "For specialized and custom requirements.",
-          features: ["Church broadcast", "Corporate studio", "Podcast video setup", "Training room streaming", "Remote production planning"]
-        }
-      ]
-    }
+      ],
+    },
   };
 
   const t = content[language];
 
   return (
     <section className={styles.section} id="services">
-      <div className={styles.container}>
+      <Reveal className={styles.container}>
         <div className={styles.header}>
+          <p className={styles.eyebrow}>{t.eyebrow}</p>
           <h2 className={styles.heading}>{t.heading}</h2>
-          <div className={styles.headingAccent}></div>
+          <p className={styles.body}>{t.body}</p>
         </div>
         
-        <div className={styles.grid}>
+        <div className={styles.serviceList}>
           {t.services.map((service, index) => (
-            <div key={index} className={styles.card}>
-              <h3 className={styles.cardTitle}>{service.title}</h3>
-              <p className={styles.cardDesc}>{service.desc}</p>
+            <article key={service.title} className={styles.serviceItem}>
+              <span className={styles.number}>{String(index + 1).padStart(2, "0")}</span>
+              <div className={styles.serviceCopy}>
+                <h3 className={styles.cardTitle}>{service.title}</h3>
+                <p className={styles.cardDesc}>{service.desc}</p>
+              </div>
               <ul className={styles.featureList}>
                 {service.features.map((feature, idx) => (
                   <li key={idx} className={styles.featureItem}>
-                    <span className={styles.checkIcon}>✓</span>
                     {feature}
                   </li>
                 ))}
               </ul>
-            </div>
+            </article>
           ))}
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 };

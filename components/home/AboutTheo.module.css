@@ -1,5 +1,5 @@
 .section {
-  padding: 6rem 5%;
+  padding: clamp(5.5rem, 10vw, 9rem) 5%;
   background: var(--bg-primary);
 }
 
@@ -7,8 +7,8 @@
   max-width: 1200px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
+  grid-template-columns: minmax(280px, 0.78fr) minmax(0, 1fr);
+  gap: clamp(3rem, 7vw, 6rem);
   align-items: center;
 }
 
@@ -19,24 +19,19 @@
 .imageWrapper {
   position: relative;
   width: 100%;
-  border-radius: 12px;
+  border-radius: 8px;
   overflow: hidden;
   aspect-ratio: 4 / 5;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
   background: #111;
 }
 
-.placeholderImage {
-  width: 100%;
-  height: 100%;
-  background-image: url('/fototheo.jpg');
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
+.image {
+  object-fit: cover;
+  object-position: center center;
   transition: transform 0.5s ease;
 }
 
-.imageWrapper:hover .placeholderImage {
+.imageWrapper:hover .image {
   transform: scale(1.05);
 }
 
@@ -54,28 +49,28 @@
   pointer-events: none;
 }
 
-.imageAccent {
-  position: absolute;
-  bottom: -20px;
-  right: -20px;
-  width: 150px;
-  height: 150px;
-  border-right: 4px solid var(--accent-primary);
-  border-bottom: 4px solid var(--accent-primary);
-  z-index: -1;
-}
-
 .textColumn {
   display: flex;
   flex-direction: column;
 }
 
+.eyebrow {
+  margin-bottom: 1.4rem;
+  color: var(--accent-primary);
+  font-size: 0.76rem;
+  font-weight: 650;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
 .heading {
   font-family: var(--font-sora);
-  font-size: clamp(1.8rem, 2.5vw, 2.5rem);
-  line-height: 1.2;
+  font-size: clamp(2.3rem, 5vw, 3.9rem);
+  font-weight: 650;
+  line-height: 0.98;
   margin-bottom: 1.5rem;
   color: var(--text-primary);
+  text-wrap: balance;
 }
 
 .body {
@@ -86,10 +81,10 @@
 }
 
 .highlightBox {
-  background: rgba(255, 106, 0, 0.05);
-  border: 1px solid rgba(255, 106, 0, 0.2);
-  padding: 1.5rem;
-  border-radius: 8px;
+  background: transparent;
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 1.5rem 0;
   display: flex;
   gap: 1rem;
   align-items: center;
@@ -108,7 +103,6 @@
   font-size: 1.1rem;
   font-weight: 600;
   color: var(--text-primary);
-  font-style: italic;
 }
 
 /* Tablet */
@@ -128,13 +122,6 @@
     margin: 0 auto;
   }
 
-  .placeholderImage {
-    background-position: center center;
-  }
-
-  .imageAccent {
-    display: none;
-  }
 }
 
 /* Mobile */
@@ -153,13 +140,8 @@
     border-radius: 10px;
   }
 
-  .placeholderImage {
-    background-size: cover;
-    background-position: center center;
-  }
-
   .heading {
-    font-size: clamp(1.8rem, 8vw, 2.4rem);
+    font-size: clamp(2.1rem, 8vw, 2.75rem);
   }
 
   .body {
@@ -168,7 +150,7 @@
   }
 
   .highlightBox {
-    padding: 1.25rem;
+    padding: 1.25rem 0;
     align-items: flex-start;
   }
 
@@ -188,7 +170,4 @@
     aspect-ratio: 4 / 5;
   }
 
-  .placeholderImage {
-    background-position: center center;
-  }
 }

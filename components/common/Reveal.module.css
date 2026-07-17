@@ -1,0 +1,38 @@
+.reveal {
+  opacity: 0;
+  transform: translate3d(0, 32px, 0);
+  transition: opacity 850ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 850ms cubic-bezier(0.22, 1, 0.36, 1),
+    clip-path 900ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.fade {
+  transform: translate3d(0, 32px, 0);
+}
+
+.scale {
+  transform: translate3d(0, 24px, 0) scale(0.97);
+}
+
+.text {
+  clip-path: inset(0 0 100% 0);
+  transform: translate3d(0, 22px, 0);
+}
+
+.visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+  clip-path: inset(0 0 0 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .scale,
+  .text {
+    opacity: 1;
+    clip-path: none;
+    transform: none;
+    transition: none;
+  }
+}

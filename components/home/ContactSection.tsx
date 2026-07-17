@@ -2,6 +2,7 @@
 
 import React from "react";
 import { useLanguage } from "@/app/context/LanguageContext";
+import Reveal from "@/components/common/Reveal";
 import styles from "./ContactSection.module.css";
 
 const whatsappUrl =
@@ -12,15 +13,17 @@ const ContactSection = () => {
 
   const content = {
     id: {
-      heading: "Ready to Make Your Event Look Professional?",
-      body: "Ceritakan detail acara Anda dan kami akan membantu merancang setup live streaming atau multimedia yang tepat.",
-      cta: "Chat WhatsApp Now",
+      eyebrow: "Mulai dari brief",
+      heading: "Siap bikin event terlihat lebih profesional?",
+      body: "Ceritakan detail acara Anda. Kami bantu susun setup yang tepat.",
+      cta: "Hubungi Kami",
       whatsappUrl
     },
     en: {
+      eyebrow: "Start with a brief",
       heading: "Ready to Make Your Event Look Professional?",
-      body: "Tell us your event details and we will help you design the right live streaming or multimedia setup.",
-      cta: "Chat WhatsApp Now",
+      body: "Tell us your event details. We will help design the right setup.",
+      cta: "Contact Us",
       whatsappUrl
     }
   };
@@ -29,16 +32,17 @@ const ContactSection = () => {
 
   return (
     <section className={styles.section} id="contact">
-      <div className={styles.container}>
+      <Reveal className={styles.container}>
         <div className={styles.content}>
+          <p className={styles.eyebrow}>{t.eyebrow}</p>
           <h2 className={styles.heading}>{t.heading}</h2>
           <p className={styles.body}>{t.body}</p>
           
           <a href={t.whatsappUrl} target="_blank" rel="noreferrer" className={styles.ctaBtn}>
-            <span className={styles.waIcon}>💬</span> {t.cta}
+            {t.cta}
           </a>
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 };

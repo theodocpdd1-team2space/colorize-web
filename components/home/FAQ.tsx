@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { useLanguage } from "@/app/context/LanguageContext";
+import Reveal from "@/components/common/Reveal";
 import styles from "./FAQ.module.css";
 
 const FAQ = () => {
@@ -14,7 +15,7 @@ const FAQ = () => {
 
   const content = {
     id: {
-      heading: "Frequently Asked Questions",
+      heading: "Pertanyaan yang Sering Ditanyakan",
       faqs: [
         {
           q: "Apakah bisa live streaming ke YouTube?",
@@ -25,8 +26,8 @@ const FAQ = () => {
           a: "Bisa. Kami melayani live streaming wedding, mulai dari akad, pemberkatan, resepsi, hingga kebutuhan hybrid guest."
         },
         {
-          q: "Apakah bisa ke luar kota Surabaya?",
-          a: "Bisa. Untuk area luar Surabaya akan menyesuaikan biaya transportasi dan kebutuhan teknis acara."
+          q: "Apakah Colorize Visual melayani area luar Surabaya?",
+          a: "Ya. Colorize Visual melayani Surabaya dan sekitarnya seperti Sidoarjo, Malang, Mojokerto, dan kota-kota lain di Jawa Timur. Kami juga bisa melayani project ke seluruh Indonesia dengan penyesuaian biaya transportasi dan akomodasi sesuai kebutuhan acara."
         },
         {
           q: "Apakah bisa tambah videotron, projector, atau TV?",
@@ -54,8 +55,8 @@ const FAQ = () => {
           a: "Yes. We provide live streaming for weddings, covering ceremonies, receptions, and hybrid guest setups."
         },
         {
-          q: "Are you available outside Surabaya?",
-          a: "Yes. For events outside Surabaya, transportation costs and technical requirements will be adjusted accordingly."
+          q: "Does Colorize Visual serve areas outside Surabaya?",
+          a: "Yes. Colorize Visual serves Surabaya and nearby areas such as Sidoarjo, Malang, Mojokerto, and other cities across East Java. We can also support projects throughout Indonesia with adjusted transportation and accommodation costs based on the event requirements."
         },
         {
           q: "Can we add a videotron, projector, or TV?",
@@ -77,7 +78,7 @@ const FAQ = () => {
 
   return (
     <section className={styles.section}>
-      <div className={styles.container}>
+      <Reveal className={styles.container}>
         <h2 className={styles.heading}>{t.heading}</h2>
         
         <div className={styles.faqList}>
@@ -95,7 +96,7 @@ const FAQ = () => {
               </button>
               <div 
                 className={styles.faqAnswer}
-                style={{ maxHeight: openIndex === index ? "200px" : "0" }}
+                style={{ maxHeight: openIndex === index ? "360px" : "0" }}
               >
                 <div className={styles.answerContent}>
                   {faq.a}
@@ -104,7 +105,7 @@ const FAQ = () => {
             </div>
           ))}
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 };

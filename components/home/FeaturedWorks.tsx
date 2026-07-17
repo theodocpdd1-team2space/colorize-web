@@ -1,6 +1,8 @@
 "use client";
 
 import Image from "next/image";
+import { useLanguage } from "@/app/context/LanguageContext";
+import Reveal from "@/components/common/Reveal";
 import { events, whatsappUrl } from "./eventData";
 import styles from "./FeaturedWorks.module.css";
 
@@ -10,19 +12,55 @@ type FeaturedWorksProps = {
 };
 
 const FeaturedWorks = ({
-  heading = "Our Works",
-  subtitle = "A selection of live streaming, multicam, wedding, graduation, and sport event productions handled by Colorize Visual.",
+  heading,
+  subtitle,
 }: FeaturedWorksProps) => {
+  const { language } = useLanguage();
+  const fallback = {
+    id: {
+      eyebrow: "Karya terpilih",
+      heading: "Event nyata, workflow nyata, hasil yang siap ditonton.",
+      subtitle:
+        "Pilihan event live streaming, multicam, wedding, graduation, dan sport production.",
+      cta: "Konsultasi Project",
+      categories: [
+        "Live streaming graduation",
+        "Broadcast event sekolah",
+        "Live streaming wedding",
+        "Live streaming graduation",
+        "Produksi multicam olahraga",
+        "Produksi live olahraga",
+      ],
+    },
+    en: {
+      eyebrow: "Featured works",
+      heading: "Real events, real workflows, broadcast-ready results.",
+      subtitle:
+        "Selected live streaming, multicam, wedding, graduation, and sport productions.",
+      cta: "Discuss Project",
+      categories: [
+        "Graduation live streaming",
+        "School event broadcast",
+        "Wedding live streaming",
+        "Graduation live streaming",
+        "Sport event multicam",
+        "Sport event live production",
+      ],
+    },
+  };
+  const t = fallback[language];
+
   return (
     <section className={styles.section}>
-      <div className={styles.container}>
+      <Reveal className={styles.container}>
         <div className={styles.header}>
-          <h2 className={styles.heading}>{heading}</h2>
-          <p className={styles.subtitle}>{subtitle}</p>
+          <p className={styles.eyebrow}>{t.eyebrow}</p>
+          <h2 className={styles.heading}>{heading ?? t.heading}</h2>
+          <p className={styles.subtitle}>{subtitle ?? t.subtitle}</p>
         </div>
         
         <div className={styles.grid}>
-          {events.map((event) => (
+          {events.map((event, index) => (
             <article key={event.title} className={styles.card}>
               <div className={styles.imageWrapper}>
                 <Image
@@ -34,7 +72,8 @@ const FeaturedWorks = ({
                 />
               </div>
               <div className={styles.content}>
-                <p className={styles.category}>{event.category}</p>
+                <p className={styles.index}>{String(index + 1).padStart(2, "0")}</p>
+                <p className={styles.category}>{t.categories[index]}</p>
                 <h3 className={styles.cardTitle}>{event.title}</h3>
                 <a
                   href={whatsappUrl}
@@ -42,13 +81,13 @@ const FeaturedWorks = ({
                   rel="noreferrer"
                   className={styles.cta}
                 >
-                  Konsultasi Project
+                  {t.cta}
                 </a>
               </div>
             </article>
           ))}
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 };

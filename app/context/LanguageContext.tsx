@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useState, ReactNode } from "react";
+import React, { createContext, useContext, useEffect, useState, ReactNode } from "react";
 
 type Language = "id" | "en";
 
@@ -13,7 +13,23 @@ interface LanguageContextProps {
 const LanguageContext = createContext<LanguageContextProps | undefined>(undefined);
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
-  const [language, setLanguage] = useState<Language>("id");
+  const [language, setLanguage] = useState<Language>(() => {
+    if (typeof window === "undefined") {
+      return "id";
+    }
+
+    const savedLanguage = window.localStorage.getItem("colorize-language");
+    if (savedLanguage === "id" || savedLanguage === "en") {
+      return savedLanguage;
+    }
+
+    return "id";
+  });
+
+  useEffect(() => {
+    document.documentElement.lang = language === "id" ? "id" : "en";
+    window.localStorage.setItem("colorize-language", language);
+  }, [language]);
 
   const toggleLanguage = () => {
     setLanguage((prev) => (prev === "id" ? "en" : "id"));
