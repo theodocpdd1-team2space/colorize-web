@@ -39,6 +39,7 @@ const Navbar = () => {
     home: language === "id" ? "Beranda" : "Home",
     about: language === "id" ? "Tentang Kami" : "About",
     services: language === "id" ? "Layanan" : "Services",
+    pricelist: language === "id" ? "Pricelist" : "Pricing",
     works: language === "id" ? "Karya" : "Works",
     email: language === "id" ? "Email" : "Email",
     whatsapp: language === "id" ? "WhatsApp" : "WhatsApp",
@@ -52,6 +53,7 @@ const Navbar = () => {
     { href: "/", label: t.home },
     { href: "/about", label: t.about },
     { href: "/services", label: t.services },
+    { href: "/pricelist", label: t.pricelist },
     { href: "/works", label: t.works },
   ];
 

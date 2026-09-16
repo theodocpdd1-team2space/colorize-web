@@ -23,6 +23,7 @@ const Footer = () => {
       home: language === "id" ? "Beranda" : "Home",
       about: language === "id" ? "Tentang Kami" : "About Us",
       services: language === "id" ? "Layanan" : "Services",
+      pricelist: language === "id" ? "Pricelist" : "Pricing",
       works: language === "id" ? "Karya" : "Portfolio",
     },
   };
@@ -43,6 +44,7 @@ const Footer = () => {
             <li><Link href="/">{t.nav.home}</Link></li>
             <li><Link href="/about">{t.nav.about}</Link></li>
             <li><Link href="/services">{t.nav.services}</Link></li>
+            <li><Link href="/pricelist">{t.nav.pricelist}</Link></li>
             <li><Link href="/works">{t.nav.works}</Link></li>
           </ul>
         </div>

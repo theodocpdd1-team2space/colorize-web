@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import JsonLd from "@/components/seo/JsonLd";
 import ServicesList from "@/components/home/ServicesList";
-import PackagePreview from "@/components/home/PackagePreview";
 import { siteUrl } from "../seo";
 
 export const metadata: Metadata = {
@@ -38,7 +37,6 @@ export default function Services() {
     <main style={{ paddingTop: '80px' }}>
       <JsonLd data={servicesJsonLd} />
       <ServicesList />
-      <PackagePreview />
     </main>
   );
 }
