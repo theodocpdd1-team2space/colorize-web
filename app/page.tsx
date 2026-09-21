@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import HeroVideo from "@/components/home/HeroVideo";
-import ClientMarquee from "@/components/home/ClientMarquee";
+import OurClients from "@/components/home/OurClients";
 import BigIntroStatement from "@/components/home/BigIntroStatement";
 import AboutTheo from "@/components/home/AboutTheo";
 import ServicesList from "@/components/home/ServicesList";
@@ -30,7 +30,7 @@ export default function Home() {
     <main>
       <HeroVideo />
       <BigIntroStatement />
-      <ClientMarquee />
+      <OurClients />
       <ServicesList />
       <NetflixDocumentation />
       <ProductionCarousel />

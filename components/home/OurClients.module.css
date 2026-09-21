@@ -1,0 +1,137 @@
+.section {
+  width: 100%;
+  padding: 6.5rem 0;
+  background: var(--color-off-white);
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.container {
+  width: 90%;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 1fr);
+  gap: 1.5rem 3rem;
+  align-items: end;
+  margin-bottom: 3rem;
+}
+
+.label {
+  grid-column: 1 / -1;
+  color: rgba(5, 5, 5, 0.6);
+  font-size: 0.76rem;
+  font-weight: 650;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.heading {
+  font-family: var(--font-sora);
+  color: var(--color-black);
+  font-size: clamp(2.2rem, 4.5vw, 3.7rem);
+  font-weight: 650;
+  line-height: 1.08;
+}
+
+.subheading {
+  max-width: 520px;
+  color: rgba(5, 5, 5, 0.62);
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.logoGrid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 1rem;
+  list-style: none;
+}
+
+.logoCard {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 0.75rem 1.5rem;
+  border-radius: 8px;
+  background: var(--color-white);
+  border: 1px solid rgba(5, 5, 5, 0.08);
+}
+
+.logo {
+  display: block;
+  width: 100%;
+  max-width: 180px;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: contain;
+}
+
+.clientName {
+  margin-top: 0.5rem;
+  color: var(--color-black);
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.5;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.moreClients {
+  margin-top: 2rem;
+  color: rgba(5, 5, 5, 0.62);
+  font-size: 1rem;
+  text-align: center;
+}
+
+@media (max-width: 1024px) {
+  .logoGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 4.5rem 0;
+  }
+
+  .header {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .heading {
+    font-size: clamp(2rem, 8vw, 2.65rem);
+  }
+
+  .subheading {
+    font-size: 0.95rem;
+  }
+
+  .logoGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .section {
+    padding: 4rem 0;
+  }
+
+  .logoGrid {
+    gap: 0.75rem;
+  }
+
+  .logoCard {
+    padding: 0.5rem 0.5rem 1rem;
+  }
+
+  .clientName {
+    font-size: 0.8rem;
+  }
+}
