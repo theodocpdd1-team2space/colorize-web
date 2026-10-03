@@ -6,6 +6,7 @@ import AboutTheo from "@/components/home/AboutTheo";
 import ServicesList from "@/components/home/ServicesList";
 import ProductionCarousel from "@/components/home/ProductionCarousel";
 import NetflixDocumentation from "@/components/home/NetflixDocumentation";
+import CameraJournal from "@/components/home/CameraJournal";
 import FeaturedWorks from "@/components/home/FeaturedWorks";
 import HowWeWork from "@/components/home/HowWeWork";
 import PromoCTA from "@/components/home/PromoCTA";
@@ -35,6 +36,7 @@ export default function Home() {
       <NetflixDocumentation />
       <ProductionCarousel />
       <FeaturedWorks />
+      <CameraJournal />
       <HowWeWork />
       <AboutTheo />
       <PromoCTA />

@@ -41,6 +41,7 @@ const Navbar = () => {
     services: language === "id" ? "Layanan" : "Services",
     pricelist: language === "id" ? "Pricelist" : "Pricing",
     works: language === "id" ? "Karya" : "Works",
+    articles: language === "id" ? "Artikel" : "Articles",
     email: language === "id" ? "Email" : "Email",
     whatsapp: language === "id" ? "WhatsApp" : "WhatsApp",
     location: language === "id" ? "Lokasi" : "Location",
@@ -55,6 +56,7 @@ const Navbar = () => {
     { href: "/services", label: t.services },
     { href: "/pricelist", label: t.pricelist },
     { href: "/works", label: t.works },
+    { href: "/artikel", label: t.articles },
   ];
 
   const closeMenu = () => setMenuOpen(false);

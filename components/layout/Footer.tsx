@@ -25,6 +25,7 @@ const Footer = () => {
       services: language === "id" ? "Layanan" : "Services",
       pricelist: language === "id" ? "Pricelist" : "Pricing",
       works: language === "id" ? "Karya" : "Portfolio",
+      articles: language === "id" ? "Artikel" : "Articles",
     },
   };
 
@@ -46,6 +47,7 @@ const Footer = () => {
             <li><Link href="/services">{t.nav.services}</Link></li>
             <li><Link href="/pricelist">{t.nav.pricelist}</Link></li>
             <li><Link href="/works">{t.nav.works}</Link></li>
+            <li><Link href="/artikel">{t.nav.articles}</Link></li>
           </ul>
         </div>
         

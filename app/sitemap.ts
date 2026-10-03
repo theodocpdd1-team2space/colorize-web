@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { siteUrl } from "./seo";
+import { articleDate, cameraArticles } from "./artikel/cameras";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
@@ -28,13 +29,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
       ],
     },
     { path: "/contact", changeFrequency: "monthly", priority: 0.8 },
+    { path: "/artikel", changeFrequency: "monthly", priority: 0.8 },
   ] as const;
 
-  return routes.map((route) => ({
+  return [...routes.map((route) => ({
     url: `${siteUrl}${route.path}`,
     lastModified,
     changeFrequency: route.changeFrequency,
     priority: route.priority,
     images: "images" in route ? [...route.images] : undefined,
-  }));
+  })), ...cameraArticles.map((article) => ({
+    url: `${siteUrl}/artikel/${article.slug}`,
+    lastModified: new Date(`${articleDate}T09:00:00+07:00`),
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+    images: [`${siteUrl}${article.image}`],
+  }))];
 }
