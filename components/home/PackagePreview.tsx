@@ -2,161 +2,11 @@
 
 import React from "react";
 import { useLanguage } from "@/app/context/LanguageContext";
+import { cinemaPackages, flashDriveMinimum, streamingPackages, type Package } from "@/lib/packages";
 import styles from "./PackagePreview.module.css";
 
 const whatsappUrl =
   "https://wa.me/62895345902896?text=Halo%2C%20saya%20ingin%20konsultasi%20paket%20live%20streaming%20Colorize%20Visual.%20Boleh%20dibantu%3F";
-
-type Package = {
-  title: string;
-  price: { id: string; en: string };
-  description: { id: string; en: string };
-  features: { id: string; en: string }[];
-  featured?: boolean;
-};
-
-const streamingPackages: Package[] = [
-  {
-    title: "Essential",
-    price: { id: "Start Rp1,75 juta", en: "Starting at Rp1.75M" },
-    description: {
-      id: "Untuk event sederhana dengan kebutuhan siaran yang rapi dan rekaman lokal.",
-      en: "For simple events that need clean streaming and local recording.",
-    },
-    features: [
-      { id: "1 kamera (Sony NX100)", en: "1 camera (Sony NX100)" },
-      { id: "1 operator", en: "1 operator" },
-      { id: "Maks. durasi kerja 4 jam (rundown)", en: "Max. 4-hour working duration (rundown)" },
-      { id: "Live streaming YouTube", en: "YouTube live streaming" },
-      { id: "Flashdisk 16 GB (output video)", en: "16 GB flash drive (video output)" },
-    ],
-  },
-  {
-    title: "Standard",
-    price: { id: "Start Rp2,8 juta", en: "Starting at Rp2.8M" },
-    description: {
-      id: "Untuk wedding, sekolah, seminar, ibadah, dan corporate event skala menengah.",
-      en: "For weddings, schools, seminars, worship services, and mid-scale corporate events.",
-    },
-    features: [
-      { id: "2 kamera (2 Sony HXR NX100)", en: "2 cameras (2 Sony HXR NX100)" },
-      { id: "2 cameramen + 1 operator", en: "2 camera operators + 1 operator" },
-      { id: "1 switcher 4 channel", en: "1 four-channel switcher" },
-      { id: "Intercom 5 pcs", en: "5 intercom units" },
-      { id: "Maks. durasi kerja 6 jam", en: "Max. 6-hour working duration" },
-      { id: "YouTube + flashdisk 16 GB", en: "YouTube + 16 GB flash drive" },
-    ],
-  },
-  {
-    title: "Signature",
-    price: { id: "Start Rp3,3 juta", en: "Starting at Rp3.3M" },
-    description: {
-      id: "Multicam yang lebih fleksibel untuk momen penting dan coverage acara yang lebih lengkap.",
-      en: "A more flexible multicam setup for key moments and broader event coverage.",
-    },
-    features: [
-      { id: "3 kamera (3 Sony HXR NX100)", en: "3 cameras (3 Sony HXR NX100)" },
-      { id: "2 cameramen + 1 operator", en: "2 camera operators + 1 operator" },
-      { id: "1 switcher 4 channel", en: "1 four-channel switcher" },
-      { id: "1 Hollyland wireless video transmitter", en: "1 Hollyland wireless video transmitter" },
-      { id: "Intercom 5 pcs", en: "5 intercom units" },
-      { id: "Maks. durasi kerja 6 jam", en: "Max. 6-hour working duration" },
-      { id: "YouTube + flashdisk 16 GB", en: "YouTube + 16 GB flash drive" },
-    ],
-  },
-  {
-    title: "Premium",
-    price: { id: "Start Rp3,6 juta", en: "Starting at Rp3.6M" },
-    description: {
-      id: "Paket dengan graphic dan gimbal untuk produksi event yang terasa lebih dinamis.",
-      en: "Adds graphics and a gimbal for a more dynamic event production.",
-    },
-    features: [
-      { id: "3 kamera (1 mirrorless, 2 Sony HXR NX100)", en: "3 cameras (1 mirrorless, 2 Sony HXR NX100)" },
-      { id: "1 operator + graphic", en: "1 operator + graphics" },
-      { id: "1 switcher 4 channel", en: "1 four-channel switcher" },
-      { id: "1 gimbal stabilizer", en: "1 gimbal stabilizer" },
-      { id: "1 Hollyland wireless video transmitter", en: "1 Hollyland wireless video transmitter" },
-      { id: "Intercom 5 pcs", en: "5 intercom units" },
-      { id: "Maks. durasi kerja 6 jam", en: "Max. 6-hour working duration" },
-      { id: "YouTube + flashdisk 16 GB", en: "YouTube + 16 GB flash drive" },
-    ],
-  },
-  {
-    title: "Premier",
-    price: { id: "Start Rp5 juta", en: "Starting at Rp5M" },
-    description: {
-      id: "Coverage empat kamera dengan Jimmy Jib dan moving camera untuk produksi yang lebih sinematik.",
-      en: "Four-camera coverage with Jimmy Jib and moving camera for a more cinematic production.",
-    },
-    features: [
-      { id: "4 kamera: Jimmy Jib, moving, mirrorless, Sony HXR NX100", en: "4 cameras: Jimmy Jib, moving, mirrorless, Sony HXR NX100" },
-      { id: "4 cameramen + 1 operator", en: "4 camera operators + 1 operator" },
-      { id: "1 switcher 4 channel", en: "1 four-channel switcher" },
-      { id: "1 gimbal stabilizer", en: "1 gimbal stabilizer" },
-      { id: "1 Hollyland wireless video transmitter", en: "1 Hollyland wireless video transmitter" },
-      { id: "Intercom 5 pcs", en: "5 intercom units" },
-      { id: "Maks. durasi kerja 6 jam", en: "Max. 6-hour working duration" },
-      { id: "YouTube + flashdisk 16 GB", en: "YouTube + 16 GB flash drive" },
-    ],
-  },
-  {
-    title: "Cinematic",
-    price: { id: "Start Rp5,7 juta", en: "Starting at Rp5.7M" },
-    description: {
-      id: "Empat kamera mirrorless dengan dua wireless transmitter untuk visual event yang lebih imersif.",
-      en: "Four mirrorless cameras with two wireless transmitters for a more immersive event visual.",
-    },
-    features: [
-      { id: "4 kamera mirrorless + 4 cameramen", en: "4 mirrorless cameras + 4 camera operators" },
-      { id: "1 operator + 1 switcher 4 channel", en: "1 operator + 1 four-channel switcher" },
-      { id: "1 gimbal stabilizer", en: "1 gimbal stabilizer" },
-      { id: "2 Hollyland wireless video transmitter", en: "2 Hollyland wireless video transmitters" },
-      { id: "Intercom 5 pcs", en: "5 intercom units" },
-      { id: "Maks. durasi kerja 6 jam", en: "Max. 6-hour working duration" },
-      { id: "YouTube + flashdisk 16 GB", en: "YouTube + 16 GB flash drive" },
-    ],
-  },
-];
-
-const cinemaPackages: Package[] = [
-  {
-    title: "Cinema Line / Netflix",
-    price: { id: "Start Rp10 jutaan", en: "Starting at Rp10M" },
-    description: {
-      id: "Paket live streaming premium dengan kamera Sony Cinema Line untuk kebutuhan visual berstandar tinggi.",
-      en: "Premium live streaming with Sony Cinema Line cameras for high-standard visual production.",
-    },
-    features: [
-      { id: "Kamera Sony Cinema Line (Netflix approved)", en: "Sony Cinema Line cameras (Netflix approved)" },
-      { id: "Output 4K Ultra HD", en: "4K Ultra HD output" },
-      { id: "Workflow produksi premium", en: "Premium production workflow" },
-      { id: "Detail crew dan setup melalui konsultasi", en: "Crew and setup details confirmed during consultation" },
-    ],
-    featured: true,
-  },
-  {
-    title: "Cinematic Elite",
-    price: { id: "Start Rp15,9 juta", en: "Starting at Rp15.9M" },
-    description: {
-      id: "Setup produksi paling lengkap di pricelist untuk event yang membutuhkan coverage dan kontrol visual tingkat lanjut.",
-      en: "The most complete setup in the pricelist for events that need advanced coverage and visual control.",
-    },
-    features: [
-      { id: "4 kamera Cinema Line: 1 FX6, 2 FX3, 1 NX100 (Jimmy Jib)", en: "4 Cinema Line cameras: 1 FX6, 2 FX3, 1 NX100 (Jimmy Jib)" },
-      { id: "Lensa 70-600mm GM, 70-200mm GM, 50mm f/1.2 GM", en: "70-600mm GM, 70-200mm GM, 50mm f/1.2 GM lenses" },
-      { id: "4 cameramen + 1 operator", en: "4 camera operators + 1 operator" },
-      { id: "1 switcher 4 channel + 1 Jimmy Jib", en: "1 four-channel switcher + 1 Jimmy Jib" },
-      { id: "Gimbal stabilizer DJI Ronin 3 Pro", en: "DJI Ronin 3 Pro gimbal stabilizer" },
-      { id: "3 Hollyland wireless video transmitter 4K", en: "3 Hollyland 4K wireless video transmitters" },
-      { id: "Ninja Atomos Record Full HD ProRes LT", en: "Ninja Atomos Full HD ProRes LT recorder" },
-      { id: "Intercom 5 pcs + maksimal durasi kerja 6 jam", en: "5 intercom units + max. 6-hour working duration" },
-      { id: "YouTube + flashdisk 32 GB", en: "YouTube + 32 GB flash drive" },
-      { id: "2 laptop + 1 monitor", en: "2 laptops + 1 monitor" },
-    ],
-    featured: true,
-  },
-];
 
 const PackageCard = ({ pkg, language }: { pkg: Package; language: "id" | "en" }) => (
   <article className={`${styles.card} ${pkg.featured ? styles.featured : ""}`}>
@@ -174,7 +24,16 @@ const PackageCard = ({ pkg, language }: { pkg: Package; language: "id" | "en" })
           <span>{feature[language]}</span>
         </li>
       ))}
+      <li className={styles.featureItem}>
+        <span className={styles.check} aria-hidden="true">✓</span>
+        <span>{language === "id" ? "Semua file rekaman via Google Drive" : "All recording files via Google Drive"}</span>
+      </li>
     </ul>
+    <p className={styles.deliveryLabel}>
+      {pkg.priceAmount < flashDriveMinimum
+        ? language === "id" ? "Flashdisk tidak termasuk" : "Flash drive not included"
+        : language === "id" ? "Flashdisk termasuk" : "Flash drive included"}
+    </p>
     <a href={whatsappUrl} target="_blank" rel="noreferrer" className={styles.ctaBtn}>
       {language === "id" ? `Konsultasi ${pkg.title}` : `Ask About ${pkg.title}`}
     </a>
@@ -189,20 +48,36 @@ const PackagePreview = () => {
     <section className={styles.section}>
       <div className={styles.container}>
         <div className={styles.header}>
-          <p className={styles.eyebrow}>Pricelist 2026 / September</p>
-          <h2 className={styles.heading}>
-            {isId ? "Paket produksi untuk setiap skala acara." : "Production packages for every event scale."}
-          </h2>
+          <p className={styles.eyebrow}>{isId ? "Pricelist / Oktober 2026" : "Pricing / October 2026"}</p>
+          <h1 className={styles.heading}>
+            {isId ? "Paket live streaming untuk setiap skala acara." : "Live streaming packages for every event scale."}
+          </h1>
           <p className={styles.body}>
             {isId
-              ? "Pilih paket berdasarkan kebutuhan produksi. Setiap harga di bawah adalah harga mulai dan dapat disesuaikan dengan venue, rundown, durasi, lokasi, serta kebutuhan teknis acara."
-              : "Choose a package based on your production needs. Every price below is a starting price and can be adjusted to the venue, rundown, duration, location, and technical requirements."}
+              ? "Paket live streaming menggunakan kamera mirrorless; pilihan produksi premium tersedia dengan Sony Cinema Line. Pilih paket berdasarkan kebutuhan produksi. Setiap harga di bawah adalah harga mulai dan dapat disesuaikan dengan venue, rundown, durasi, lokasi, serta kebutuhan teknis acara."
+              : "Live streaming packages use mirrorless cameras, with Sony Cinema Line available for premium productions. Choose a package based on your production needs. Every price below is a starting price and can be adjusted to the venue, rundown, duration, location, and technical requirements."}
           </p>
         </div>
 
+        <section className={styles.deliveryPanel} aria-labelledby="recording-delivery-title">
+          <div>
+            <p className={styles.noteEyebrow}>{isId ? "Penyerahan rekaman" : "Recording delivery"}</p>
+            <h2 id="recording-delivery-title">{isId ? "File acara, mudah diakses." : "Your event files, easy to access."}</h2>
+          </div>
+          <div>
+            <h3>Google Drive</h3>
+            <p>{isId ? "Semua file rekaman akan diunggah ke Google Drive dan tautannya dibagikan kepada klien." : "All recording files will be uploaded to Google Drive, with the link shared with the client."}</p>
+          </div>
+          <div>
+            <h3>{isId ? "Salin setelah acara" : "Copy after the event"}</h3>
+            <p>{isId ? "File juga dapat disalin ke harddisk atau flashdisk milik klien setelah acara selesai. Siapkan media dengan ruang penyimpanan yang cukup." : "Files can also be copied to the client's hard drive or flash drive after the event. Please bring a drive with enough available storage."}</p>
+          </div>
+          <p className={styles.deliveryPolicy}>{isId ? "Paket di bawah Rp3,8 juta tidak termasuk flashdisk. Flashdisk disertakan untuk paket mulai Rp3,8 juta." : "Packages below Rp3.8 million do not include a flash drive. A flash drive is included for packages from Rp3.8 million."}</p>
+        </section>
+
         <div className={styles.sectionHeading}>
           <span>01</span>
-          <h3>Live Streaming Packages</h3>
+          <h2>{isId ? "Paket Live Streaming" : "Live Streaming Packages"}</h2>
           <p>{isId ? "Untuk event, wedding, birthday, sekolah, ibadah, dan corporate." : "For events, weddings, birthdays, schools, worship services, and corporate productions."}</p>
         </div>
         <div className={styles.grid}>
@@ -213,7 +88,7 @@ const PackagePreview = () => {
 
         <div className={styles.sectionHeading}>
           <span>02</span>
-          <h3>Cinema Line &amp; Professional</h3>
+          <h2>Cinema Line &amp; Professional</h2>
           <p>{isId ? "Untuk produksi premium dengan kebutuhan kamera dan kontrol visual yang lebih tinggi." : "For premium productions that need advanced cameras and visual control."}</p>
         </div>
         <div className={styles.premiumGrid}>

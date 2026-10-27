@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import FeaturedWorks from "@/components/home/FeaturedWorks";
 import WorksShowcase from "@/components/works/WorksShowcase";
+import VideoPortfolio from "@/components/works/VideoPortfolio";
+import { portfolioVideos } from "@/lib/portfolio";
 import JsonLd from "@/components/seo/JsonLd";
 import { siteUrl } from "../seo";
 import styles from "./works.module.css";
@@ -11,7 +13,7 @@ const whatsappUrl =
 export const metadata: Metadata = {
   title: "Portfolio Live Streaming Surabaya, Wedding & Corporate Event",
   description:
-    "Lihat portfolio Colorize Visual untuk live streaming, multicam, wedding, graduation, sport event, corporate event, dan broadcasting production di Surabaya.",
+    "Portofolio live streaming dan multicam Colorize Visual. Tonton Pensi Wijana Sejati dan AWEHA Massive 2026, serta dokumentasi wedding dan corporate event.",
   alternates: {
     canonical: "/works",
   },
@@ -39,6 +41,20 @@ const worksJsonLd = {
   inLanguage: ["id-ID", "en-US"],
   description:
     "Portfolio jasa live streaming, multicam, wedding, graduation, corporate event, dan broadcasting production di Surabaya.",
+  mainEntity: {
+    "@type": "ItemList",
+    itemListElement: portfolioVideos.map((video, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      item: {
+        "@type": "CreativeWork",
+        name: `${video.title} — ${video.client}`,
+        url: `https://www.youtube.com/watch?v=${video.id}`,
+        image: `${siteUrl}${video.image}`,
+        description: video.description.id,
+      },
+    })),
+  },
 };
 
 export default function Works() {
@@ -64,6 +80,7 @@ export default function Works() {
           </a>
         </div>
       </section>
+      <VideoPortfolio />
       <WorksShowcase />
       <FeaturedWorks />
     </main>

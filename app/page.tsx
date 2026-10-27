@@ -8,6 +8,7 @@ import ProductionCarousel from "@/components/home/ProductionCarousel";
 import NetflixDocumentation from "@/components/home/NetflixDocumentation";
 import CameraJournal from "@/components/home/CameraJournal";
 import FeaturedWorks from "@/components/home/FeaturedWorks";
+import VideoPortfolio from "@/components/works/VideoPortfolio";
 import HowWeWork from "@/components/home/HowWeWork";
 import PromoCTA from "@/components/home/PromoCTA";
 import FAQ from "@/components/home/FAQ";
@@ -36,6 +37,7 @@ export default function Home() {
       <NetflixDocumentation />
       <ProductionCarousel />
       <FeaturedWorks />
+      <VideoPortfolio />
       <CameraJournal />
       <HowWeWork />
       <AboutTheo />
